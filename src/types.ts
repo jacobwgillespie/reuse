@@ -28,13 +28,12 @@ export type UnionToIntersection<U> = (U extends any
  * Get component props
  * @template T Component type
  */
-export type ComponentToProps<T> = T extends never
-  ? React.ClassAttributes<T> & { children?: React.ReactNode }
-  : (T extends React.ComponentType<infer P> | React.Component<infer P>
-      ? P
-      : (T extends keyof JSX.IntrinsicElements
-          ? JSX.IntrinsicElements[T]
-          : never));
+export type ComponentToProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  | React.ExoticComponent<infer P>
+  ? P
+  : never;
 
 /**
  * Use prop
